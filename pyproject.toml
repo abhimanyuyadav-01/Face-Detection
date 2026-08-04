@@ -1,0 +1,9 @@
+[project]
+name = "ai-playground-4-projects"
+version = "1.0.0"
+description = "Four real-world AI projects (NLP, computer vision x2, recommendation systems) with a shared Streamlit front end."
+requires-python = ">=3.10"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

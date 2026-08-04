@@ -1,0 +1,30 @@
+# Web app framework
+streamlit>=1.32
+
+# Data handling
+pandas>=2.0
+numpy>=1.26
+
+# Project 1 & 4 — NLP / TF-IDF / cosine similarity / classic ML
+scikit-learn>=1.4
+
+# Project 2 — deep learning (transfer learning with MobileNetV2)
+# CPU-only build: smaller install, and Streamlit Community Cloud has no GPU anyway.
+tensorflow-cpu>=2.16
+
+# Project 3 — computer vision
+# IMPORTANT: use opencv-python-headless (not opencv-python /
+# opencv-contrib-python) on any server/container deployment — the regular
+# build pulls in a GUI backend (libGL) that headless Linux servers don't
+# have, which is the #1 cause of OpenCV crashing on Streamlit Cloud.
+opencv-python-headless>=4.9
+
+# Images
+pillow>=10.0
+
+# Charts (confusion matrix heatmap)
+matplotlib>=3.8
+seaborn>=0.13
+
+# Testing
+pytest>=8.0
