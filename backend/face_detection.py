@@ -25,6 +25,7 @@ requiring the caller to think about OpenCV's BGR channel order.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+import importlib
 from pathlib import Path
 from typing import List, Tuple, Union
 
@@ -38,9 +39,13 @@ def _resolve_cv2_module():
     if hasattr(_cv2, "CascadeClassifier") and hasattr(_cv2, "data"):
         return _cv2
 
-    nested_cv2 = getattr(_cv2, "cv2", None)
-    if nested_cv2 is not None and hasattr(nested_cv2, "CascadeClassifier"):
-        return nested_cv2
+    for module_name in ("cv2.cv2",):
+        try:
+            nested_cv2 = importlib.import_module(module_name)
+        except Exception:
+            continue
+        if hasattr(nested_cv2, "CascadeClassifier") and hasattr(nested_cv2, "data"):
+            return nested_cv2
 
     return _cv2
 
