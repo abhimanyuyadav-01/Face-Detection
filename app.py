@@ -13,7 +13,7 @@ from pathlib import Path
 import streamlit as st
 from PIL import Image
 
-ROOT_DIR = Path(__file__).resolve().parent.parent
+ROOT_DIR = Path(__file__).resolve().parent
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 

@@ -147,7 +147,7 @@ A GitHub Actions workflow (`.github/workflows/tests.yml`) runs this same suite a
 4. Open **"Advanced settings"** and set the **Python version** to **3.11** (this app supports 3.10–3.13; 3.11 is a safe, well-tested choice).
 5. Click **Deploy**.
 
-The first deploy takes a few minutes — it's installing TensorFlow and, the first time someone opens the Image Recognition page, downloading MobileNetV2's weights. Subsequent loads are much faster.
+The first deploy takes a few minutes while Streamlit installs the Python dependencies listed in `requirements.txt`. Subsequent loads are much faster.
 
 **If you see an OpenCV / `libGL.so.1` error:** this repo already includes the two standard fixes (`opencv-python-headless` in `requirements.txt`, and `libgl1` in `packages.txt`), so this shouldn't happen — but if it does, double check both files made it into your repo (they're easy to accidentally `.gitignore` or skip).
 
