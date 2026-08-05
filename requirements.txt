@@ -13,7 +13,7 @@ scikit-learn>=1.4
 # opencv-contrib-python) on any server/container deployment — the regular
 # build pulls in a GUI backend (libGL) that headless Linux servers don't
 # have, which is the #1 cause of OpenCV crashing on Streamlit Cloud.
-opencv-python-headless==4.10.0.84
+opencv-python-headless==5.0.0.93
 
 # Images
 pillow>=10.0
