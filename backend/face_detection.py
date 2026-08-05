@@ -28,12 +28,24 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import List, Tuple, Union
 
-import cv2
-print(cv2.__file__)
-print(cv2.__version__)
-print(hasattr(cv2, "CascadeClassifier"))
+import cv2 as _cv2
 import numpy as np
 from PIL import Image
+
+
+def _resolve_cv2_module():
+    """Return the actual OpenCV extension module if cv2 is wrapped."""
+    if hasattr(_cv2, "CascadeClassifier") and hasattr(_cv2, "data"):
+        return _cv2
+
+    nested_cv2 = getattr(_cv2, "cv2", None)
+    if nested_cv2 is not None and hasattr(nested_cv2, "CascadeClassifier"):
+        return nested_cv2
+
+    return _cv2
+
+
+cv2 = _resolve_cv2_module()
 
 ImageLike = Union[str, Path, Image.Image, np.ndarray]
 
@@ -63,6 +75,12 @@ class FaceDetector:
     """
 
     def __init__(self, cascade_file: str = "haarcascade_frontalface_default.xml"):
+        if not hasattr(cv2, "CascadeClassifier"):
+            raise RuntimeError(
+                "Your OpenCV installation does not expose CascadeClassifier. "
+                "Reinstall opencv-python-headless and clear Streamlit's build cache."
+            )
+
         cascade_path = cv2.data.haarcascades + cascade_file
         self.detector = cv2.CascadeClassifier(cascade_path)
         if self.detector.empty():
